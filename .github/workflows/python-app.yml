@@ -65,6 +65,7 @@ jobs:
           use-vulture: true
           extra-pylint-options: "--output-format=colorized --disable=C0114,C0116"  # Missing doctrings
           extra-pydocstyle-options: "--ignore=D1"  # Missing doctrings
+          python-version: "3.10.13"
     - name: Test with pytest
       run: |
         poetry run pytest
