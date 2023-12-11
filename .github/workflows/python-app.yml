@@ -45,6 +45,7 @@ jobs:
       if: steps.cache-deps.outputs.cache-hit != 'true'
     - run: |
         poetry install --no-interaction
+        poetry shell
     #00- name: Lint with flake8
       #00run: |
         #00# stop the build if there are Python syntax errors or undefined names
