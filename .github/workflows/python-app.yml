@@ -45,28 +45,12 @@ jobs:
       if: steps.cache-deps.outputs.cache-hit != 'true'
     - run: |
         poetry install --no-interaction
-        source $(poetry env info --path)/bin/activate # poetry shell
-    #00- name: Lint with flake8
-      #00run: |
-        #00# stop the build if there are Python syntax errors or undefined names
-        #00poetry run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        #00# exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        #00poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Lint with pylint
-      uses: marian-code/python-lint-annotate@v3
-      with:
-          python-root-list: "src/*.py"
-          use-black: true
-          use-isort: true
-          use-mypy: true
-          use-pycodestyle: true
-          use-pydocstyle: false
-          use-pylint: false
-          use-flake8: false
-          use-vulture: true
-          extra-pylint-options: "--output-format=colorized --disable=C0114,C0116"  # Missing doctrings
-          extra-pydocstyle-options: "--ignore=D1"  # Missing doctrings
-          python-version: "3.10.13"
+    - name: Lint with flake8
+      run: |
+        # stop the build if there are Python syntax errors or undefined names
+        poetry run flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+        poetry run flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
         poetry run pytest
